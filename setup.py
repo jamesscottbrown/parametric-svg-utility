@@ -35,9 +35,10 @@ setup(
         parametric-svg-utility=parametric_svg_utility.cli:cli
     """,
     install_requires=[
-        "cairosvg",
-        "click",
-        "sympy"
+        "cairosvg==2.5.2",
+        "click==8.0.0a1",
+        "sympy==1.7.1",
+        "tabulate==0.8.9"
     ],
     extras_require={"test": ["pytest"]},
     tests_require=["parametric-svg-utility[test]"],
