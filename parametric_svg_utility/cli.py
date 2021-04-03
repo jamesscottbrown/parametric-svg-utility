@@ -3,10 +3,12 @@ from tabulate import tabulate
 
 from parametric_svg_utility import utils
 
+
 @click.group()
 @click.version_option()
 def cli():
     """Apply transformations to Parametric SVG files"""
+
 
 # See docs at https://zetcode.com/python/click/
 
@@ -20,8 +22,8 @@ def cli():
 @cli.command()
 @click.argument("input_files", type=click.File("rb"), nargs=-1, required=True)
 @click.option('-c', '--csv', help='Format output as CSV, rather than pretty-printed table')
-@click.option('--full-name/--short-name', help='Show full file path as provided as argument, or just file name', required=False, default=False)
-
+@click.option('--full-name/--short-name', help='Show full file path as provided as argument, or just file name',
+              required=False, default=False)
 def parameters(input_files, csv, full_name):
     """List parameters and their default values"""
 

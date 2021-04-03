@@ -3,8 +3,8 @@ import os
 
 base_dir = '../glyph_definitions'
 
-def tabulate_params(input_files, full_name=True):
 
+def tabulate_params(input_files, full_name=True):
     all_params = set(['glyphtype', 'soterms'])
 
     rows = []
@@ -16,7 +16,7 @@ def tabulate_params(input_files, full_name=True):
         if not full_name:
             base_name = base_name.split('/')[-1]
 
-        #if extension != ".svg":
+        # if extension != ".svg":
         #    continue
 
         tree = ET.parse(file)
