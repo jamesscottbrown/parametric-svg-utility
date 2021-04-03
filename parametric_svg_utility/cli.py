@@ -224,6 +224,17 @@ def substitute_params(images, old, new):
         yield (image_data, filename)
 
 
+@process.command("delete_unused_parameters")
+@processor
+def delete_unused_parameters(images):
+    """
+    Delete assignment of default values to any parameters that are not used in any parametric expressions.
+    """
+    for (image_data, filename) in images:
+        image_data = utils.delete_unused_parameters(image_data)
+        yield (image_data, filename)
+
+
 @process.command("save")
 @processor
 @click.option(

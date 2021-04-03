@@ -105,6 +105,36 @@ def convert_parametric_attributes(root):
     return root
 
 
+def delete_unused_parameters(svg_tree):
+    used_parametric_attributes = set()
+
+    def get_parameter_names(expr_string):
+        params = set()
+        for match in re.finditer(r'\{(.*?)\}', expr_string):
+            params = params.union(sympy.sympify(match.group(1)).free_symbols)
+        return params
+
+    for child in svg_tree:
+        for attrib in child.attrib:
+            if attrib.startswith('{https://parametric-svg.github.io/v0.2}'):
+                symbols = get_parameter_names(child.attrib[attrib])
+                used_parametric_attributes = used_parametric_attributes.union(symbols)
+
+    used_parametric_attributes = [str(x) for x in used_parametric_attributes]
+
+    param_string = svg_tree.attrib['{https://parametric-svg.github.io/v0.2}defaults']
+    assignments = param_string.split(';')
+    filtered_assignments = []
+    for assignment in assignments:
+        (var_name, value) = assignment.split('=')
+        if var_name in used_parametric_attributes:
+            filtered_assignments.append(assignment)
+
+    svg_tree.attrib['{https://parametric-svg.github.io/v0.2}defaults'] = ";".join(filtered_assignments)
+
+    return svg_tree
+
+
 def remove_by_class(parent_node, class_name):
     nodes_to_remove = []
     for child in parent_node:
