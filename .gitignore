@@ -1,0 +1,8 @@
+*.pyc
+__pycache__/
+.cache/
+venv/
+.idea/
+build/
+dist/
+parametric_svg_utility.egg-info/
