@@ -1,20 +1,23 @@
 import click
 from tabulate import tabulate
 
-import xml.etree.ElementTree as ET
-
 import os
 from parametric_svg_utility import utils
 from functools import update_wrapper
 
 
-@click.group(chain=True)
+@click.group()
 @click.version_option()
 def cli():
     """Apply transformations to Parametric SVG files"""
 
 
-@cli.resultcallback()
+@cli.group(chain=True, help='Modify a parametric SVG file or files')
+@click.version_option()
+def process():
+    pass
+
+@process.resultcallback()
 def process_commands(processors):
     """This result callback is invoked with an iterable of all the chained
     subcommands.  As in this example each subcommand returns a function
@@ -31,14 +34,6 @@ def process_commands(processors):
     # Evaluate the stream and throw away the items.
     for _ in stream:
         pass
-
-# See docs at https://zetcode.com/python/click/
-
-# Commands:
-# - tabulate params
-# - add a g element and transformation around files
-# - apply substitution into formulae
-# - substitute in params [either defaults or new]
 
 
 @cli.command()
@@ -63,9 +58,6 @@ def parameters(input_files, csv, full_name):
             table.append(vals)
 
         print(tabulate(table, headers=fieldnames))
-
-################
-
 
 
 def processor(f):
@@ -97,7 +89,7 @@ def generator(f):
 
 ###################
 
-@cli.command("open")
+@process.command("open")
 @click.option(
     "-i",
     "--image",
@@ -122,7 +114,7 @@ def open_cmd(images):
             click.echo(f"Could not open image '{image_path}': {e}", err=True)
 
 
-@cli.command("remove_parametric_params")
+@process.command("remove_parametric_params")
 @processor
 def remove_parametric_params_cmd(images):
     """
@@ -133,7 +125,7 @@ def remove_parametric_params_cmd(images):
 
 
 # TODO: rename to something like update_nonparametric_attribute or apply_parametric_attributes?
-@cli.command("convert_parametric_attributes")
+@process.command("convert_parametric_attributes")
 @processor
 def convert_parametric_attributes_cmd(images):
     """
@@ -143,7 +135,7 @@ def convert_parametric_attributes_cmd(images):
         yield (utils.remove_parametric_attributes(image_data), filename)
 
 
-@cli.command("delete_by_class")
+@process.command("delete_by_class")
 @click.option(
     "-c",
     "--class",
@@ -164,7 +156,7 @@ def delete_by_class(images, classes):
 
 
 
-@cli.command("apply_transformation")
+@process.command("apply_transformation")
 @click.option(
     "-t",
     "--transformation",
@@ -182,7 +174,7 @@ def apply_transformation_cmd(images, transformation):
         yield (image_data, filename)
 
 
-@cli.command("style_class")
+@process.command("style_class")
 @click.option(
     "-c",
     "--class",
@@ -207,7 +199,7 @@ def style_class(images, class_name, style):
         yield (image_data, filename)
 
 
-@cli.command("substitute_params")
+@process.command("substitute_params")
 @click.option(
     "-o",
     "--old",
@@ -233,7 +225,7 @@ def substitute_params(images, old, new):
 
 
 
-@cli.command("save")
+@process.command("save")
 @processor
 @click.option(
     "--dir",
