@@ -1,7 +1,6 @@
 import os
 import re
 import xml.etree.ElementTree as ET
-from math import floor
 
 import sympy
 from cairosvg import svg2png, svg2pdf

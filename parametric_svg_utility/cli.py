@@ -17,6 +17,7 @@ def cli():
 def process():
     pass
 
+
 @process.resultcallback()
 def process_commands(processors):
     """This result callback is invoked with an iterable of all the chained
@@ -98,7 +99,7 @@ def generator(f):
     multiple=True,
     help="The image file to open.",
 )
-#@click.argument("images", type=click.Path(), nargs=-1, required=True)
+# @click.argument("images", type=click.Path(), nargs=-1, required=True)
 # N.B.: if this is an argument, the next command gets recongised as an input ile, throwing error
 @generator
 def open_cmd(images):
@@ -153,7 +154,6 @@ def delete_by_class(images, classes):
         for class_name in classes:
             image_data = utils.remove_by_class(image_data, class_name)
         yield (image_data, filename)
-
 
 
 @process.command("apply_transformation")
@@ -224,7 +224,6 @@ def substitute_params(images, old, new):
         yield (image_data, filename)
 
 
-
 @process.command("save")
 @processor
 @click.option(
@@ -249,5 +248,3 @@ def save_cmd(images, dir, format):
         except Exception as e:
             click.echo(f"Could not save image '{image_filename}'", err=True)
             print(e)
-
-
