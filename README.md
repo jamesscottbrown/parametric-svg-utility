@@ -25,11 +25,21 @@ python setup.py install
 ```
 psvg-cli parameters glyph_definitions/*
 
-psvg-cli process opendir ./glyph_definitions -i glyph_definitions/CDS.svg remove_parametric_params save
+psvg-cli process opendir ./glyph_definitions  \
+remove_parametric_params save
 
-psvg-cli process open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg remove_parametric_params save
-psvg-cli process open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg remove_parametric_params save --format all
-psvg-cli process open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg remove_parametric_params delete_by_class -c baseline save 
+psvg-cli process \
+open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg \
+remove_parametric_params save
+
+psvg-cli process \
+open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg remove_parametric_params \
+save --format all
+
+psvg-cli process \
+open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg \ 
+remove_parametric_params delete_by_class -c baseline save 
+
 psvg-cli process open -i glyph_definitions/Aptamer.svg apply_transformation save 
 
 psvg-cli process \
