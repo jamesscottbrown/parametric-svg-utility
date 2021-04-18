@@ -7,6 +7,19 @@ It is written in Python, using the [click](https://click.palletsprojects.com) li
 You can access help for the tool as a whole (`psvg-cli --help`), or for a specific command (`psvg-cli process --help`), or a subcommand (`psvg-cli process open --help`).
 
 
+## Installation
+
+You can install the latest release from pypi using `pip install psvg-cli`
+
+Alternatively, you can install from the source code in this repository by running:
+
+```shell
+git clone https://github.com/jamesscottbrown/psvg-cli.git
+cd psvg-cli
+python setup.py install
+```
+
+
 ## Examples
 
 ```
