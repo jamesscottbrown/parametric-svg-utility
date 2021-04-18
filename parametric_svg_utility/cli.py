@@ -114,6 +114,25 @@ def open_cmd(images):
         except Exception as e:
             click.echo(f"Could not open image '{image_path}': {e}", err=True)
 
+@process.command("opendir")
+@click.argument("dir", type=click.Path(), nargs=1, required=True)
+@generator
+def open_cmd(dir):
+    """Loads all images in a directory for processing.
+    """
+    for file_name in os.listdir(dir):
+        image_path = os.path.join(dir, file_name)
+        if not file_name.endswith(".svg"):
+            click.echo(f"Skipping file {file_name} as it does not have .svg extension")
+            continue
+
+        try:
+            click.echo(f"Opening '{image_path}'")
+            img = utils.open_image(image_path)
+            yield (img, image_path)
+        except Exception as e:
+            click.echo(f"Could not open image '{image_path}': {e}", err=True)
+
 
 @process.command("remove_parametric_params")
 @processor
