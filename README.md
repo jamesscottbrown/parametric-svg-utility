@@ -11,7 +11,7 @@ It is written in Python, using the [click](https://click.palletsprojects.com) li
 ```
 parametric-svg-utility parameters glyph_definitions/*
 
-
+parametric-svg-utility process opendir ./glyph_definitions -i glyph_definitions/CDS.svg remove_parametric_params save
 
 parametric-svg-utility process open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg remove_parametric_params save
 parametric-svg-utility process open -i glyph_definitions/Aptamer.svg -i glyph_definitions/CDS.svg remove_parametric_params save --format all
@@ -29,3 +29,5 @@ substitute -o width -n w \
 save
 
 ```
+
+By default, the results of `process` commands will be written to a `./processed` directory.
