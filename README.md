@@ -1,3 +1,7 @@
+[![PyPI](https://img.shields.io/pypi/v/psvg-cli)](https://pypi.org/project/psvg-cli)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/psvg-cli)](https://pypi.org/project/psvg-cli)
+
+
 # Parametric SVG Utility
 
 `psvg-cli` is a commandline utility for applying various transformations to Parametric SVG files.
