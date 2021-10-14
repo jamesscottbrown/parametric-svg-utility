@@ -2,7 +2,7 @@ import click
 from tabulate import tabulate
 
 import os
-from parametric_svg_utility import utils
+from psvg_cli import utils
 from functools import update_wrapper
 
 
